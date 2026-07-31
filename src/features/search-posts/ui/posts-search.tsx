@@ -1,7 +1,6 @@
 "use client"
 
 import { PostMeta } from "@/entities/post"
-import { preventOrphan } from "@/shared/lib/prevent-orphan"
 import { SearchIcon } from "@/shared/ui/icons/search-icon"
 import { H2 } from "@/shared/ui/typography"
 import Link from "next/link"
@@ -45,7 +44,7 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 								<div className="relative p-6 pt-8">
 									<span className="bg-primary absolute -top-2 left-6 h-3 w-3 rounded-full shadow-sm" aria-hidden />
 									<span className="text-secondary text-xs tracking-widest uppercase">{post.date}</span>
-									<H2 className="mt-2 mb-4 text-xl">{preventOrphan(post.title)}</H2>
+									<H2 className="mt-2 mb-4 text-xl">post.title</H2>
 									<span className="text-primary inline-flex items-center gap-1.5 text-sm font-medium">
 										Читать рецепт
 										<span className="transition-transform group-hover:translate-x-1" aria-hidden>

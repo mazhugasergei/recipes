@@ -7,7 +7,9 @@ export function Header() {
 			<Container className="text-primary-foreground flex items-center justify-between rounded-2xl bg-[#232323] py-2">
 				<Logo />
 
-				<span className="text-secondary-foreground text-xs tracking-widest uppercase">домашняя кухня</span>
+				<span className="text-secondary-foreground text-xs tracking-widest uppercase max-sm:hidden">
+					домашняя кухня
+				</span>
 			</Container>
 		</header>
 	)

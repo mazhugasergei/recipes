@@ -1,7 +1,6 @@
 import { getAllPostsMeta, getPostBySlug } from "@/entities/post"
 import { lora } from "@/shared/config/fonts"
 import { formatDateRu } from "@/shared/lib/format-date"
-import { preventOrphan } from "@/shared/lib/prevent-orphan"
 import { H1, H2 } from "@/shared/ui/typography"
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
@@ -52,7 +51,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
 	return (
 		<>
-			<H1 className="mb-3">{preventOrphan(post.title)}</H1>
+			<H1 className="mb-3">post.title</H1>
 			<div className="text-secondary border-primary/40 mb-6 inline-block border-b-2 border-dashed pb-2 text-xs tracking-widest uppercase">
 				{formatDateRu(post.date)}
 			</div>
