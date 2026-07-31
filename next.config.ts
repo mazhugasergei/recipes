@@ -1,14 +1,12 @@
 import createMDX from "@next/mdx"
 import type { NextConfig } from "next"
 
-const IS_PROD = process.env.NODE_ENV === "production"
-
 const nextConfig: NextConfig = {
 	reactCompiler: true,
 	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 	output: "export",
-	basePath: IS_PROD ? "/recipes" : "",
-	assetPrefix: IS_PROD ? "/recipes" : "",
+	basePath: process.env.NODE_ENV === "production" ? "/recipes" : "",
+	assetPrefix: process.env.NODE_ENV === "production" ? "/recipes" : "",
 	trailingSlash: true,
 	skipTrailingSlashRedirect: true,
 	images: { unoptimized: true },
