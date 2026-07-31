@@ -11,7 +11,7 @@ export function Logo() {
 
 			<span className={`${marckScript.className} text-primary leading-none`}>
 				<span className="block text-lg">рецепты от</span>
-				<span className="-mt-1 block text-2xl">наташи</span>
+				<span className="-mt-3 block text-2xl">наташи</span>
 			</span>
 		</Link>
 	)
