@@ -6,9 +6,9 @@ import Link from "next/link"
 export function Logo() {
 	return (
 		<Link href="/" className="group inline-flex -rotate-1 items-center gap-2 transition-transform hover:rotate-0">
-			<UtensilsIcon className="text-primary shrink-0" />
+			<UtensilsIcon className="text-primary-foreground shrink-0" />
 
-			<span className={cn(marckScript.className, "text-primary leading-none")}>
+			<span className={cn(marckScript.className, "text-primary-foreground leading-none")}>
 				<span className="block text-lg">рецепты от</span>
 				<span className="-mt-3 block text-2xl">наташи</span>
 			</span>
