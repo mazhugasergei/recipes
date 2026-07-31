@@ -6,7 +6,7 @@ export default function PostLayout({ children }: { children: React.ReactNode }) 
 		<Container className="py-16">
 			<Link
 				href="/"
-				className="text-secondary hover:text-foreground mb-8 inline-block text-sm underline-offset-4 hover:underline"
+				className="text-secondary hover:text-foreground -m-2 mb-8 inline-block p-2 text-sm underline-offset-4 hover:underline"
 			>
 				← Все рецепты
 			</Link>
