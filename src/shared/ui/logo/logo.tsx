@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export function Logo() {
 	return (
-		<Link href="/" className="group inline-flex -rotate-1 items-center gap-2 transition-transform hover:rotate-0">
+		<Link href="/" className="group inline-flex -rotate-2 items-center gap-2 transition-transform hover:-rotate-1">
 			<UtensilsIcon className="text-primary-foreground shrink-0" />
 
 			<span className={cn(marckScript.className, "text-primary-foreground leading-none")}>
