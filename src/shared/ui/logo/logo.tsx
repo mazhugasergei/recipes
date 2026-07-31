@@ -10,7 +10,7 @@ export function Logo() {
 
 			<span className={cn(marckScript.className, "text-primary-foreground leading-none")}>
 				<span className="block text-lg">рецепты от</span>
-				<span className="-mt-3 block text-2xl">наташи</span>
+				<span className="-mt-3 block text-2xl">Наташи</span>
 			</span>
 		</Link>
 	)
