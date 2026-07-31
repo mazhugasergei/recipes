@@ -1,6 +1,8 @@
 import { getAllPostsMeta } from "@/entities/post"
 import { MetadataRoute } from "next"
 
+export const dynamic = "force-static"
+
 const BASE_URL = "https://mazhugasergei.github.io/recipes"
 
 export default function sitemap(): MetadataRoute.Sitemap {
