@@ -3,6 +3,12 @@ import { PostsSearch } from "@/features/search-posts/ui/posts-search"
 import { preventOrphan } from "@/shared/lib/prevent-orphan"
 import { Container } from "@/shared/ui/container/container"
 import { H1 } from "@/shared/ui/typography"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+	title: "Рецепты от Наташи — домашняя кухня",
+	description: "Простые домашние рецепты, проверенные временем — без лишних ингредиентов и сложных техник.",
+}
 
 export default function HomePage() {
 	const posts = getAllPostsMeta()

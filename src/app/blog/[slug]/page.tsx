@@ -3,6 +3,7 @@ import { lora } from "@/shared/config/fonts"
 import { formatDateRu } from "@/shared/lib/format-date"
 import { preventOrphan } from "@/shared/lib/prevent-orphan"
 import { H1, H2 } from "@/shared/ui/typography"
+import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { notFound } from "next/navigation"
 
@@ -21,6 +22,28 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+	const { slug } = await params
+	const post = getPostBySlug(slug)
+	if (!post) return {}
+
+	const description = post.content
+		.replace(/[#*_>\-\[\]!]/g, "")
+		.replace(/\s+/g, " ")
+		.trim()
+		.slice(0, 160)
+
+	return {
+		title: `${post.title} — Рецепты от Наташи`,
+		description,
+		openGraph: {
+			title: post.title,
+			description,
+			images: post.image ? [post.image] : undefined,
+		},
+	}
+}
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
 	const { slug } = await params
