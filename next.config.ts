@@ -4,6 +4,10 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
 	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 	reactCompiler: true,
+	output: "export",
+	trailingSlash: true,
+	skipTrailingSlashRedirect: true,
+	images: { unoptimized: true },
 }
 
 const withMDX = createMDX({
