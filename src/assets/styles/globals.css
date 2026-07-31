@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+	/* base palette (your named tokens) */
+	--paper: #fcf6ea;
+	--ink: #34281f;
+	--paprika: #c1501f;
+	--sage: #6e7b54;
+	--yolk: #e8ae3d;
+	--card: #fffdf8;
+	--line: #e7d9be;
+
+	/* shadcn-style semantic slots, mapped to the palette above */
+	--background: var(--paper);
+	--foreground: var(--ink);
+
+	--primary: var(--paprika);
+	--primary-foreground: var(--paper);
+
+	--secondary: var(--sage);
+	--secondary-foreground: var(--paper);
+
+	--destructive: #b3261e;
+	--destructive-foreground: var(--paper);
+
+	--accent: var(--yolk);
+	--accent-foreground: var(--ink);
+
+	--muted: color-mix(in srgb, var(--line) 50%, var(--paper));
+	--muted-foreground: color-mix(in srgb, var(--ink) 65%, transparent);
+
+	--card-bg: var(--card);
+	--card-foreground: var(--ink);
+
+	--border: var(--line);
+	--input: var(--line);
+	--ring: var(--paprika);
+}
+
+@theme {
+	/* re-expose everything as Tailwind color utilities */
+	--color-paper: var(--paper);
+	--color-ink: var(--ink);
+	--color-paprika: var(--paprika);
+	--color-sage: var(--sage);
+	--color-yolk: var(--yolk);
+	--color-card: var(--card-bg);
+	--color-line: var(--line);
+
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+}
+
+.card-perforation::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 24px;
+	right: 24px;
+	height: 1px;
+	background-image: repeating-linear-gradient(to right, var(--color-border) 0 6px, transparent 6px 12px);
+}
+
+* {
+	border-color: var(--color-border);
+}
