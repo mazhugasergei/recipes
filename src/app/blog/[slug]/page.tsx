@@ -15,6 +15,9 @@ const mdxComponents = {
 			{props.children}
 		</li>
 	),
+	img: (props: React.ComponentProps<"img">) => (
+		<img {...props} src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${props.src}`} />
+	),
 }
 
 export function generateStaticParams() {
@@ -59,7 +62,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
 			{post.image && (
 				<img
-					src={post.image}
+					src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${post.image}`}
 					alt={post.title}
 					className="mb-10 h-72 w-full rounded-2xl object-cover shadow-lg sm:h-96"
 				/>
