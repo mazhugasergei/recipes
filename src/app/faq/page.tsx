@@ -1,6 +1,5 @@
 import { lora } from "@/shared/config/fonts"
 import { cn } from "@/shared/lib/cn"
-import { Container } from "@/shared/ui/container/container"
 import { H1, H2 } from "@/shared/ui/typography"
 import { Metadata } from "next"
 import { ReactNode } from "react"
@@ -53,7 +52,7 @@ const faqItems: FaqItem[] = [
 
 export default function FaqPage() {
 	return (
-		<Container className="py-16 text-pretty">
+		<main>
 			<H1 className="mb-10">Вопросы и ответы</H1>
 			<div className={cn(lora.className, "space-y-10")}>
 				{faqItems.map((item) => (
@@ -63,6 +62,6 @@ export default function FaqPage() {
 					</div>
 				))}
 			</div>
-		</Container>
+		</main>
 	)
 }

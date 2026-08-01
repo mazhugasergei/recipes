@@ -1,4 +1,3 @@
-import { Container } from "@/shared/ui/container/container"
 import { H1, H2 } from "@/shared/ui/typography"
 import { Metadata } from "next"
 
@@ -50,7 +49,7 @@ const contactFields: { key: keyof Omit<Contact, "name" | "role">; label: string 
 
 export default function ContactsPage() {
 	return (
-		<Container className="py-16">
+		<main>
 			<H1 className="mb-10">Контакты</H1>
 
 			<div className="space-y-8">
@@ -82,6 +81,6 @@ export default function ContactsPage() {
 					</div>
 				))}
 			</div>
-		</Container>
+		</main>
 	)
 }

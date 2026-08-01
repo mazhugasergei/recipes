@@ -1,6 +1,7 @@
 import "@/assets/styles"
 import { inter, playfair } from "@/shared/config/fonts"
 import { cn } from "@/shared/lib/cn"
+import { Container } from "@/shared/ui/container/container"
 import { Footer } from "@/widgets/footer/ui/footer"
 import { Header } from "@/widgets/header/ui/header"
 
@@ -15,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				)}
 			>
 				<Header />
-				<main className="flex-1 px-6">{children}</main>
+				<Container className="flex-1 px-4 py-16 sm:px-6">{children}</Container>
 				<Footer />
 			</body>
 		</html>

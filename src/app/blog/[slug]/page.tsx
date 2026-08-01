@@ -51,8 +51,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 	if (!post) notFound()
 
 	return (
-		<>
-			<H1 className="mb-3">{post.title}</H1>
+		<main>
+			<H1>{post.title}</H1>
 			<div className="text-secondary border-primary/40 mb-6 inline-block border-b-2 border-dashed pb-2 text-xs tracking-widest uppercase">
 				{formatDateRu(post.date)}
 			</div>
@@ -68,11 +68,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 			<div
 				className={cn(
 					lora.className,
-					"[&_p]:text-foreground/90 [&_a]:text-primary text-[17px] [&_a]:underline [&_a]:underline-offset-4 [&_img]:my-8 [&_img]:rounded-2xl [&_img]:shadow-lg [&_p]:mb-5 [&_p]:leading-relaxed [&_ul]:mb-5 [&_ul]:space-y-2"
+					"[&_a]:text-primary space-y-5 text-[17px] [&_a]:underline [&_a]:underline-offset-4 [&_img]:my-8 [&_img]:rounded-2xl [&_img]:shadow-lg [&_p]:leading-relaxed [&_ul]:mb-5 [&_ul]:space-y-2"
 				)}
 			>
 				<MDXRemote source={post.content} components={mdxComponents} />
 			</div>
-		</>
+		</main>
 	)
 }

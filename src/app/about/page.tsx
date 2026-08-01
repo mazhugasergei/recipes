@@ -1,6 +1,5 @@
 import { lora } from "@/shared/config/fonts"
 import { cn } from "@/shared/lib/cn"
-import { Container } from "@/shared/ui/container/container"
 import { H1 } from "@/shared/ui/typography"
 import { Metadata } from "next"
 
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
 	return (
-		<Container className="py-16">
+		<main>
 			<H1 className="mb-6">О сайте</H1>
 			<div className={cn(lora.className, "[&_p]:text-foreground/90 max-w-2xl space-y-4 leading-relaxed")}>
 				<p>
@@ -25,6 +24,6 @@ export default function AboutPage() {
 				</p>
 				<p>Если у вас есть вопросы или пожелания — загляните на страницу контактов, будем рады обратной связи.</p>
 			</div>
-		</Container>
+		</main>
 	)
 }

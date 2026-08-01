@@ -1,6 +1,5 @@
 import { lora } from "@/shared/config/fonts"
 import { cn } from "@/shared/lib/cn"
-import { Container } from "@/shared/ui/container/container"
 import { H1, H2 } from "@/shared/ui/typography"
 import { Metadata } from "next"
 import { ReactNode } from "react"
@@ -108,7 +107,7 @@ const sections: PolicySection[] = [
 
 export default function PrivacyPage() {
 	return (
-		<Container className="py-16">
+		<main>
 			<H1 className="mb-2">Политика конфиденциальности</H1>
 			<p className="text-secondary mb-10 text-xs tracking-widest uppercase">Обновлено: 1 августа 2026 г.</p>
 
@@ -132,6 +131,6 @@ export default function PrivacyPage() {
 					</section>
 				))}
 			</div>
-		</Container>
+		</main>
 	)
 }
