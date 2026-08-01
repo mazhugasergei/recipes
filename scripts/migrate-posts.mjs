@@ -7,6 +7,7 @@ import sharp from "sharp"
 const POSTS_DIR = "public/posts"
 const MAX_IMAGE_SIZE = 1280
 const EXAMPLE_FILE = "example.mdx"
+const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif)$/i
 
 // cyrillic → latin map, same transliteration rules used for slugs elsewhere on the site
 const RU_TO_LAT = {
@@ -96,20 +97,15 @@ async function saveAsWebp(buffer, imagesDir) {
 	return filename
 }
 
-// finds the single raw mdx file to process, excluding the example, and enforces exactly one at a time
-function findRawMdxFile() {
+// loose top-level files, split by type — used to decide whether multiple mdx files can be processed safely
+function findRawFiles() {
 	const entries = fs.readdirSync(POSTS_DIR, { withFileTypes: true })
-	const rawFiles = entries
-		.filter((entry) => entry.isFile() && entry.name.endsWith(".mdx") && entry.name !== EXAMPLE_FILE)
-		.map((entry) => entry.name)
+	const files = entries.filter((entry) => entry.isFile()).map((entry) => entry.name)
 
-	if (rawFiles.length > 1) {
-		throw new Error(
-			`expected exactly one raw .mdx file in ${POSTS_DIR}, found ${rawFiles.length}: ${rawFiles.join(", ")}`
-		)
-	}
+	const mdxFiles = files.filter((name) => name.endsWith(".mdx") && name !== EXAMPLE_FILE)
+	const imageFiles = files.filter((name) => IMAGE_EXTENSIONS.test(name))
 
-	return rawFiles[0] ?? null
+	return { mdxFiles, imageFiles }
 }
 
 async function migratePost(filename) {
@@ -177,13 +173,30 @@ async function main() {
 		return
 	}
 
-	const rawFile = findRawMdxFile()
-	if (!rawFile) {
+	const { mdxFiles, imageFiles } = findRawFiles()
+
+	if (mdxFiles.length === 0) {
 		console.log("no raw .mdx file found in public/posts — nothing to migrate")
 		return
 	}
 
-	await migratePost(rawFile)
+	// with loose local images present, there's no way to tell which image belongs to which
+	// post if multiple mdx files are being processed at once — stay strict in that case
+	if (mdxFiles.length > 1 && imageFiles.length > 0) {
+		throw new Error(
+			`found ${mdxFiles.length} raw .mdx files alongside ${imageFiles.length} loose image(s) — ` +
+				`when local images are present, only one .mdx can be processed at a time, since there's ` +
+				`no way to tell which image belongs to which post. Either process one post at a time, or ` +
+				`use only remote image urls when migrating multiple posts together.`
+		)
+	}
+
+	// no ambiguity possible — every referenced image is either remote, or there's only one post to match against
+	for (const filename of mdxFiles) {
+		await migratePost(filename)
+	}
+
+	console.log(`migrated ${mdxFiles.length} post(s)`)
 }
 
 main().catch((error) => {
