@@ -3,7 +3,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"prebuild": "node scripts/migrate-posts.mjs"
 	},
 	"dependencies": {
 		"@mdx-js/loader": "3.1.1",
@@ -28,6 +29,7 @@
 		"prettier": "3.9.6",
 		"prettier-plugin-organize-imports": "4.3.0",
 		"prettier-plugin-tailwindcss": "0.8.1",
+		"sharp": "0.35.3",
 		"tailwindcss": "4",
 		"typescript": "5"
 	}

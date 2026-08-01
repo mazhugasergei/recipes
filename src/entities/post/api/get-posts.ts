@@ -1,9 +1,8 @@
-import { slugify } from "@/shared/lib/transliterate"
 import fs from "fs"
 import matter from "gray-matter"
 import path from "path"
 
-const POSTS_DIR = path.join(process.cwd(), "content/posts")
+const POSTS_DIR = path.join(process.cwd(), "public/posts")
 
 interface PostFrontmatter {
 	title: string
@@ -18,15 +17,24 @@ export interface PostMeta {
 	image?: string
 }
 
+// each post now lives in its own folder (public/posts/{slug}/index.mdx) after the migration script runs,
+// so this reads directory names directly instead of deriving the slug from the title
+function getPostSlugs(): string[] {
+	return fs
+		.readdirSync(POSTS_DIR, { withFileTypes: true })
+		.filter((entry) => entry.isDirectory())
+		.map((entry) => entry.name)
+}
+
 export function getAllPostsMeta(): PostMeta[] {
-	const files = fs.readdirSync(POSTS_DIR)
-	const posts = files.map((filename) => {
-		const raw = fs.readFileSync(path.join(POSTS_DIR, filename), "utf-8")
+	const slugs = getPostSlugs()
+	const posts = slugs.map((slug) => {
+		const raw = fs.readFileSync(path.join(POSTS_DIR, slug, "index.mdx"), "utf-8")
 		const { data } = matter(raw)
 		const frontmatter = data as PostFrontmatter
 
 		return {
-			slug: slugify(frontmatter.title),
+			slug,
 			title: frontmatter.title,
 			date: frontmatter.date,
 			image: frontmatter.image,
@@ -41,14 +49,14 @@ export interface Post extends PostMeta {
 }
 
 export function getAllPosts(): Post[] {
-	const files = fs.readdirSync(POSTS_DIR)
-	return files.map((filename) => {
-		const raw = fs.readFileSync(path.join(POSTS_DIR, filename), "utf-8")
+	const slugs = getPostSlugs()
+	return slugs.map((slug) => {
+		const raw = fs.readFileSync(path.join(POSTS_DIR, slug, "index.mdx"), "utf-8")
 		const { data, content } = matter(raw)
 		const frontmatter = data as PostFrontmatter
 
 		return {
-			slug: slugify(frontmatter.title),
+			slug,
 			title: frontmatter.title,
 			date: frontmatter.date,
 			image: frontmatter.image,
@@ -58,5 +66,18 @@ export function getAllPosts(): Post[] {
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
-	return getAllPosts().find((post) => post.slug === slug)
+	const dirPath = path.join(POSTS_DIR, slug)
+	if (!fs.existsSync(dirPath)) return undefined
+
+	const raw = fs.readFileSync(path.join(dirPath, "index.mdx"), "utf-8")
+	const { data, content } = matter(raw)
+	const frontmatter = data as PostFrontmatter
+
+	return {
+		slug,
+		title: frontmatter.title,
+		date: frontmatter.date,
+		image: frontmatter.image,
+		content,
+	}
 }
