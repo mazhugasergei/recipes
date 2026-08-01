@@ -19,16 +19,14 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 	return (
 		<>
 			<div className="relative mb-10">
-				<div className="relative mb-10">
-					<SearchIcon className="text-secondary pointer-events-none absolute top-1/2 left-4 -translate-y-1/2" />
-					<input
-						type="text"
-						value={query}
-						onChange={(e) => setQuery(e.target.value)}
-						placeholder="Найти рецепт…"
-						className="bg-card text-foreground placeholder:text-secondary/70 focus-visible:ring-ring/50 w-full rounded-xl border py-3 pr-4 pl-11 text-sm shadow-[0_1px_3px_rgba(0,0,0,0.04)] outline-none focus-visible:ring-[3px]"
-					/>
-				</div>
+				<SearchIcon className="text-secondary pointer-events-none absolute top-1/2 left-4 -translate-y-1/2" />
+				<input
+					type="text"
+					value={query}
+					onChange={(e) => setQuery(e.target.value)}
+					placeholder="Найти рецепт…"
+					className="bg-card text-foreground placeholder:text-secondary/70 shadow-soft w-full rounded-xl border py-3 pr-4 pl-11 text-sm"
+				/>
 			</div>
 
 			{filtered.length === 0 ? (
@@ -36,10 +34,10 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 			) : (
 				<ul className="grid gap-6 sm:grid-cols-2">
 					{filtered.map((post) => (
-						<li key={post.slug} className="card-perforation relative">
+						<li key={post.slug} className="relative">
 							<Link
-								href={`/blog/${post.slug}`}
-								className="group bg-card hover:bg-card/80 focus-visible:ring-ring/50 border-border/60 block h-full overflow-hidden rounded-2xl border shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] focus-visible:ring-[3px] focus-visible:outline-none"
+								href={"/blog/" + post.slug}
+								className="group bg-card border-border/60 shadow-soft hover:shadow-soft-hover block h-full overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-0.5"
 							>
 								{post.image && (
 									<div className="overflow-hidden">
@@ -52,7 +50,7 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 								)}
 
 								<div className="p-6">
-									<span className="text-secondary bg-secondary/10 inline-flex rounded-full px-2.5 py-1 text-xs font-medium tracking-wide uppercase">
+									<span className="text-secondary bg-secondary/10 inline-flex rounded-full px-2.5 py-1 text-[.7rem] font-medium tracking-wide uppercase">
 										{formatDateRu(post.date)}
 									</span>
 

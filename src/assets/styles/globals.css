@@ -70,16 +70,28 @@
 	--color-ring: var(--ring);
 }
 
-.card-perforation::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 24px;
-	right: 24px;
-	height: 1px;
-	background-image: repeating-linear-gradient(to right, var(--color-border) 0 6px, transparent 6px 12px);
-}
-
 * {
 	border-color: var(--color-border);
+}
+
+*:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent);
+	border-color: var(--ring);
+}
+
+@utility focus-ring-* {
+	&:focus-visible {
+		outline: none;
+		box-shadow: 0 0 0 3px color-mix(in srgb, --value(--color-*, [color]) 50%, transparent);
+		border-color: --value(--color-*, [color]);
+	}
+}
+
+@utility shadow-soft {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+@utility shadow-soft-hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }

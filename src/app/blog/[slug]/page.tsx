@@ -1,5 +1,6 @@
 import { getAllPostsMeta, getPostBySlug } from "@/entities/post"
 import { lora } from "@/shared/config/fonts"
+import { cn } from "@/shared/lib/cn"
 import { formatDateRu } from "@/shared/lib/format-date"
 import { H1, H2 } from "@/shared/ui/typography"
 import { Metadata } from "next"
@@ -65,7 +66,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 			)}
 
 			<div
-				className={`${lora.className} [&_p]:text-foreground/90 [&_a]:text-primary text-[17px] [&_a]:underline [&_a]:underline-offset-4 [&_img]:my-8 [&_img]:rounded-2xl [&_img]:shadow-lg [&_p]:mb-5 [&_p]:leading-relaxed [&_ul]:mb-5 [&_ul]:space-y-2`}
+				className={cn(
+					lora.className,
+					"[&_p]:text-foreground/90 [&_a]:text-primary text-[17px] [&_a]:underline [&_a]:underline-offset-4 [&_img]:my-8 [&_img]:rounded-2xl [&_img]:shadow-lg [&_p]:mb-5 [&_p]:leading-relaxed [&_ul]:mb-5 [&_ul]:space-y-2"
+				)}
 			>
 				<MDXRemote source={post.content} components={mdxComponents} />
 			</div>
