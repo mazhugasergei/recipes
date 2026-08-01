@@ -42,7 +42,7 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 								{post.image && (
 									<div className="overflow-hidden">
 										<img
-											src={post.image}
+											src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${post.image}`}
 											alt={post.title}
 											className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
 										/>
