@@ -8,6 +8,7 @@ interface PostFrontmatter {
 	title: string
 	date: string
 	image?: string
+	tags?: string[]
 }
 
 export interface PostMeta {
@@ -15,6 +16,7 @@ export interface PostMeta {
 	title: string
 	date: string
 	image?: string
+	tags: string[]
 }
 
 // each post now lives in its own folder (public/posts/{slug}/index.mdx) after the migration script runs,
@@ -38,6 +40,7 @@ export function getAllPostsMeta(): PostMeta[] {
 			title: frontmatter.title,
 			date: frontmatter.date,
 			image: frontmatter.image,
+			tags: frontmatter.tags ?? [],
 		}
 	})
 
@@ -60,6 +63,7 @@ export function getAllPosts(): Post[] {
 			title: frontmatter.title,
 			date: frontmatter.date,
 			image: frontmatter.image,
+			tags: frontmatter.tags ?? [],
 			content,
 		}
 	})
@@ -78,6 +82,18 @@ export function getPostBySlug(slug: string): Post | undefined {
 		title: frontmatter.title,
 		date: frontmatter.date,
 		image: frontmatter.image,
+		tags: frontmatter.tags ?? [],
 		content,
 	}
+}
+
+// returns every unique tag across all posts, sorted alphabetically — useful for a tag filter/index page
+export function getAllTags(): string[] {
+	const tags = getAllPostsMeta().flatMap((post) => post.tags)
+	return [...new Set(tags)].sort((a, b) => a.localeCompare(b, "ru"))
+}
+
+// returns posts that include the given tag
+export function getPostsByTag(tag: string): PostMeta[] {
+	return getAllPostsMeta().filter((post) => post.tags.includes(tag))
 }
