@@ -7,6 +7,10 @@ import { H2 } from "@/shared/ui/typography"
 import Link from "next/link"
 import { useMemo, useState } from "react"
 
+function withBasePath(src: string) {
+	return `${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${src}`
+}
+
 export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 	const [query, setQuery] = useState("")
 
@@ -16,9 +20,12 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 		return posts.filter((post) => post.title.toLocaleLowerCase("ru").includes(q))
 	}, [posts, query])
 
+	const isSearching = query.trim().length > 0
+	const [featured, ...rest] = filtered
+
 	return (
 		<>
-			<div className="relative mb-10">
+			<div className="relative mb-12">
 				<SearchIcon className="text-secondary pointer-events-none absolute top-1/2 left-4 -translate-y-1/2" />
 				<input
 					type="text"
@@ -32,41 +39,75 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 			{filtered.length === 0 ? (
 				<p className="text-secondary text-sm">Ничего не нашлось по запросу «{query}». Попробуйте другое слово.</p>
 			) : (
-				<ul className="grid gap-6 sm:grid-cols-2">
-					{filtered.map((post) => (
-						<li key={post.slug} className="relative">
-							<Link
-								href={"/blog/" + post.slug}
-								className="group bg-card border-border/60 shadow-soft hover:shadow-soft-hover block h-full overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-0.5"
-							>
-								{post.image && (
-									<div className="overflow-hidden">
-										<img
-											src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${post.image}`}
-											alt={post.title}
-											className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-										/>
-									</div>
-								)}
-
-								<div className="p-6">
-									<span className="text-secondary bg-secondary/10 inline-flex rounded-full px-2.5 py-1 text-[.7rem] font-medium tracking-wide uppercase">
-										{formatDateRu(post.date)}
-									</span>
-
-									<H2 className="mt-4 text-xl leading-tight sm:text-2xl">{post.title}</H2>
-
-									<span className="text-primary mt-5 inline-flex items-center gap-2 text-sm font-medium">
-										Читать рецепт
-										<span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
-											→
-										</span>
+				<div className="space-y-12">
+					{/* first result gets a larger, editorial treatment — a small hierarchy cue instead of a uniform wall of identical cards */}
+					{featured && (
+						<Link
+							href={`/blog/${featured.slug}`}
+							className="group bg-card border-border shadow-soft grid gap-6 rounded-3xl border p-6 sm:grid-cols-2 sm:items-center"
+						>
+							{featured.image && (
+								<div className="bg-muted relative aspect-4/3 overflow-hidden rounded-2xl">
+									<img
+										src={withBasePath(featured.image)}
+										alt={featured.title}
+										className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+									/>
+									<span className="bg-primary text-primary-foreground absolute top-4 left-4 rounded-full px-3 py-1 text-xs font-medium tracking-wide uppercase shadow-sm">
+										{isSearching ? "Совпадение" : "Новый рецепт"}
 									</span>
 								</div>
-							</Link>
-						</li>
-					))}
-				</ul>
+							)}
+							<div>
+								<span className="text-secondary text-xs font-medium tracking-widest uppercase">
+									{formatDateRu(featured.date)}
+								</span>
+								<H2 className="mt-3 text-2xl leading-snug sm:text-3xl">{featured.title}</H2>
+								<span className="text-primary mt-4 inline-flex items-center gap-1.5 text-sm font-medium">
+									Читать рецепт
+									<span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
+										→
+									</span>
+								</span>
+							</div>
+						</Link>
+					)}
+
+					{rest.length > 0 && (
+						<ul className="grid gap-6 sm:grid-cols-2">
+							{rest.map((post) => (
+								<li key={post.slug}>
+									<Link
+										href={`/blog/${post.slug}`}
+										className="group bg-card border-border shadow-soft block h-full rounded-[1.75rem] border p-4"
+									>
+										{post.image && (
+											<div className="bg-muted mb-4 aspect-4/3 overflow-hidden rounded-xl">
+												<img
+													src={withBasePath(post.image)}
+													alt={post.title}
+													className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+												/>
+											</div>
+										)}
+										<div className="px-2 pb-1">
+											<span className="text-secondary text-xs font-medium tracking-widest uppercase">
+												{formatDateRu(post.date)}
+											</span>
+											<H2 className="mt-2 text-lg leading-snug">{post.title}</H2>
+											<span className="text-primary mt-3 inline-flex items-center gap-1.5 text-sm font-medium">
+												Читать рецепт
+												<span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
+													→
+												</span>
+											</span>
+										</div>
+									</Link>
+								</li>
+							))}
+						</ul>
+					)}
+				</div>
 			)}
 		</>
 	)

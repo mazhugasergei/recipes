@@ -91,7 +91,3 @@
 @utility shadow-soft {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
-
-@utility shadow-soft-hover {
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
