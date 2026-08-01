@@ -1,6 +1,6 @@
 import { getAllPostsMeta } from "@/entities/post"
 import { PostsSearch } from "@/features/search-posts/ui/posts-search"
-import { H1 } from "@/shared/ui/typography"
+import { H1, Text } from "@/shared/ui/typography"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -15,9 +15,9 @@ export default function HomePage() {
 		<main className="pt-4">
 			<section className="mb-16">
 				<H1 className="mb-4 max-w-lg">Домашние рецепты, проверенные временем</H1>
-				<p className="text-foreground/70 max-w-md leading-relaxed text-pretty">
+				<Text as="p" className="text-foreground/70 max-w-md leading-relaxed text-pretty">
 					Простые блюда, которые готовятся у нас на кухне каждую неделю — без лишних ингредиентов и сложных техник.
-				</p>
+				</Text>
 			</section>
 
 			<div id="recipes">

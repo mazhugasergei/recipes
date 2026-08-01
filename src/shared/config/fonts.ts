@@ -1,22 +1,25 @@
-import { Inter, Lora, Marck_Script, Playfair_Display } from "next/font/google"
+import { Merriweather as HeadingFont, Lobster as LogoFont, Inter as MainFont, Lora as TextFont } from "next/font/google"
 
-export const playfair = Playfair_Display({
+export const mainFont = MainFont({
 	subsets: ["latin", "cyrillic"],
-	weight: ["600", "700"],
-	variable: "--font-heading",
-})
-
-export const inter = Inter({
-	subsets: ["latin", "cyrillic"],
+	weight: ["400", "500"],
 	variable: "--font-body",
 })
 
-export const lora = Lora({
+export const textFont = TextFont({
 	subsets: ["latin", "cyrillic"],
 	weight: ["400", "500"],
+	variable: "--font-text",
 })
 
-export const marckScript = Marck_Script({
+export const logoFont = LogoFont({
 	subsets: ["latin", "cyrillic"],
 	weight: "400",
+	variable: "--font-logo",
+})
+
+export const headingFont = HeadingFont({
+	subsets: ["latin", "cyrillic"],
+	weight: ["700"],
+	variable: "--font-heading",
 })

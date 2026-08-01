@@ -1,6 +1,7 @@
-import { lora } from "@/shared/config/fonts"
+import { textFont } from "@/shared/config/fonts"
 import { cn } from "@/shared/lib/cn"
 import { H1, H2 } from "@/shared/ui/typography"
+import { Text } from "@/shared/ui/typography/text"
 import { Metadata } from "next"
 import { ReactNode } from "react"
 
@@ -54,11 +55,11 @@ export default function FaqPage() {
 	return (
 		<main>
 			<H1 className="mb-10">Вопросы и ответы</H1>
-			<div className={cn(lora.className, "space-y-10")}>
+			<div className={cn(textFont.className, "space-y-10")}>
 				{faqItems.map((item) => (
 					<div key={item.question}>
 						<H2 className="mb-2">{item.question}</H2>
-						<div className="text-foreground/90 leading-relaxed">{item.answer}</div>
+						<Text>{item.answer}</Text>
 					</div>
 				))}
 			</div>

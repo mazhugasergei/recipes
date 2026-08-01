@@ -1,22 +1,27 @@
 import { getAllPostsMeta, getPostBySlug } from "@/entities/post"
-import { lora } from "@/shared/config/fonts"
-import { cn } from "@/shared/lib/cn"
 import { formatDateRu } from "@/shared/lib/format-date"
-import { H1, H2 } from "@/shared/ui/typography"
+import { H1, H2, Text } from "@/shared/ui/typography"
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { notFound } from "next/navigation"
 
 const mdxComponents = {
 	h2: (props: React.ComponentProps<"h2">) => <H2 className="mt-10 mb-4 text-2xl" {...props} />,
+	p: (props: React.ComponentProps<"p">) => <Text as="p" {...props} />,
+	a: (props: React.ComponentProps<"a">) => <a className="text-primary underline underline-offset-4" {...props} />,
+	ul: (props: React.ComponentProps<"ul">) => <ul className="mb-5 space-y-2" {...props} />,
 	li: (props: React.ComponentProps<"li">) => (
-		<li className="text-foreground/90 relative pl-5 [&::marker]:content-none" {...props}>
+		<li className="relative pl-5 [&::marker]:content-none" {...props}>
 			<span className="bg-primary absolute top-2.5 left-0 h-1.5 w-1.5 rounded-full" aria-hidden />
-			{props.children}
+			<Text>{props.children}</Text>
 		</li>
 	),
 	img: (props: React.ComponentProps<"img">) => (
-		<img {...props} src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${props.src}`} />
+		<img
+			className="my-8 rounded-2xl shadow-lg"
+			src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${props.src}`}
+			{...props}
+		/>
 	),
 }
 
@@ -68,14 +73,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 				/>
 			)}
 
-			<div
-				className={cn(
-					lora.className,
-					"[&_a]:text-primary space-y-5 text-[17px] [&_a]:underline [&_a]:underline-offset-4 [&_img]:my-8 [&_img]:rounded-2xl [&_img]:shadow-lg [&_p]:leading-relaxed [&_ul]:mb-5 [&_ul]:space-y-2"
-				)}
-			>
-				<MDXRemote source={post.content} components={mdxComponents} />
-			</div>
+			<MDXRemote source={post.content} components={mdxComponents} />
 		</main>
 	)
 }

@@ -43,7 +43,7 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 					{/* first result gets a larger, editorial treatment — a small hierarchy cue instead of a uniform wall of identical cards */}
 					{featured && (
 						<Link
-							href={`/blog/${featured.slug}`}
+							href={"/blog/" + featured.slug}
 							className="group bg-card border-border shadow-soft grid gap-6 rounded-3xl border p-6 sm:grid-cols-2 sm:items-center"
 						>
 							{featured.image && (
@@ -78,8 +78,8 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 							{rest.map((post) => (
 								<li key={post.slug}>
 									<Link
-										href={`/blog/${post.slug}`}
-										className="group bg-card border-border shadow-soft block h-full rounded-[1.75rem] border p-4"
+										href={"/blog/" + post.slug}
+										className="group bg-card border-border shadow-soft grid h-full grid-rows-[auto_1fr] rounded-[1.75rem] border p-4"
 									>
 										{post.image && (
 											<div className="bg-muted mb-4 aspect-4/3 overflow-hidden rounded-xl">
@@ -90,11 +90,11 @@ export function PostsSearch({ posts }: { posts: PostMeta[] }) {
 												/>
 											</div>
 										)}
-										<div className="px-2 pb-1">
+										<div className="grid grid-rows-[auto_1fr_auto] px-2 pb-1">
 											<span className="text-secondary text-xs font-medium tracking-widest uppercase">
 												{formatDateRu(post.date)}
 											</span>
-											<H2 className="mt-2 text-lg leading-snug">{post.title}</H2>
+											<H2 className="mt-2 text-2xl! leading-snug">{post.title}</H2>
 											<span className="text-primary mt-3 inline-flex items-center gap-1.5 text-sm font-medium">
 												Читать рецепт
 												<span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>

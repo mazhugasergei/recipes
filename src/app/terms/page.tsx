@@ -1,6 +1,6 @@
-import { lora } from "@/shared/config/fonts"
+import { textFont } from "@/shared/config/fonts"
 import { cn } from "@/shared/lib/cn"
-import { H1, H2 } from "@/shared/ui/typography"
+import { H1, H2, Text } from "@/shared/ui/typography"
 import { Metadata } from "next"
 import { ReactNode } from "react"
 
@@ -94,25 +94,25 @@ export default function TermsPage() {
 	return (
 		<main>
 			<H1 className="mb-2">Условия использования</H1>
-			<p className="text-secondary mb-10 text-xs tracking-widest uppercase">Обновлено: 1 августа 2026 г.</p>
+			<p className="mb-10 text-xs tracking-widest uppercase">Обновлено: 1 августа 2026 г.</p>
 
 			<div
 				className={cn(
-					lora.className,
+					textFont.className,
 					"[&_p]:text-foreground/90 [&_a]:text-primary [&_a]:underline [&_h2]:mt-10 [&_h2]:mb-3 [&_p]:mb-4 [&_p]:leading-relaxed [&_p]:text-pretty"
 				)}
 			>
-				<p>
+				<Text as="p">
 					Используя сайт «Рецепты от Наташи», вы соглашаетесь с настоящими условиями использования. Если вы не согласны
 					с каким-либо из пунктов, пожалуйста, не используйте сайт.
-				</p>
+				</Text>
 
 				{sections.map((section, index) => (
 					<section key={section.title}>
 						<H2>
 							{index + 1}. {section.title}
 						</H2>
-						{section.body}
+						<Text>{section.body}</Text>
 					</section>
 				))}
 			</div>
