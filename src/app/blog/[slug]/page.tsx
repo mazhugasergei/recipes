@@ -1,4 +1,5 @@
 import { getAllPostsMeta, getPostBySlug } from "@/entities/post"
+import { cn } from "@/shared/lib/cn"
 import { formatDateRu } from "@/shared/lib/format-date"
 import { H1, H2, Text } from "@/shared/ui/typography"
 import { Metadata } from "next"
@@ -6,20 +7,28 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { notFound } from "next/navigation"
 
 const mdxComponents = {
-	h2: (props: React.ComponentProps<"h2">) => <H2 className="mt-10 mb-4 text-2xl" {...props} />,
-	p: (props: React.ComponentProps<"p">) => <Text as="p" {...props} />,
-	a: (props: React.ComponentProps<"a">) => <a className="text-primary underline underline-offset-4" {...props} />,
-	ul: (props: React.ComponentProps<"ul">) => <ul className="mb-5 space-y-2" {...props} />,
-	li: (props: React.ComponentProps<"li">) => (
-		<li className="relative pl-5 [&::marker]:content-none" {...props}>
+	h2: ({ className, ...props }: React.ComponentProps<"h2">) => (
+		<H2 className={cn("mt-10 mb-4 text-2xl", className)} {...props} />
+	),
+	p: ({ className, ...props }: React.ComponentProps<"p">) => (
+		<Text as="p" className={cn("mb-4", className)} {...props} />
+	),
+	a: ({ className, ...props }: React.ComponentProps<"a">) => (
+		<a className={cn("text-primary underline underline-offset-4", className)} {...props} />
+	),
+	ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
+		<ul className={cn("mb-5 space-y-2", className)} {...props} />
+	),
+	li: ({ className, ...props }: React.ComponentProps<"li">) => (
+		<li className={cn("relative pl-5 [&::marker]:content-none", className)} {...props}>
 			<span className="bg-primary absolute top-2.5 left-0 h-1.5 w-1.5 rounded-full" aria-hidden />
 			<Text>{props.children}</Text>
 		</li>
 	),
-	img: (props: React.ComponentProps<"img">) => (
+	img: ({ src, className, ...props }: React.ComponentProps<"img">) => (
 		<img
-			className="my-8 rounded-2xl shadow-lg"
-			src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${props.src}`}
+			className={cn("my-8 rounded-2xl shadow-lg", className)}
+			src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${src}`}
 			{...props}
 		/>
 	),
