@@ -53,7 +53,7 @@ export default function ContactsPage() {
 		<Container className="py-16">
 			<H1 className="mb-10">Контакты</H1>
 
-			<div className="max-w-2xl space-y-8">
+			<div className="space-y-8">
 				{contacts.map((contact) => (
 					<div key={contact.name} className="bg-card rounded-2xl border p-6">
 						<H2 className="text-lg">{contact.name}</H2>

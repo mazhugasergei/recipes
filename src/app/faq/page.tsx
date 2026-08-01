@@ -53,9 +53,9 @@ const faqItems: FaqItem[] = [
 
 export default function FaqPage() {
 	return (
-		<Container className="py-16">
+		<Container className="py-16 text-pretty">
 			<H1 className="mb-10">Вопросы и ответы</H1>
-			<div className={cn(lora.className, "max-w-2xl space-y-10")}>
+			<div className={cn(lora.className, "space-y-10")}>
 				{faqItems.map((item) => (
 					<div key={item.question}>
 						<H2 className="mb-2">{item.question}</H2>
