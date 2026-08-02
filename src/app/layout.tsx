@@ -4,6 +4,7 @@ import { cn } from "@/shared/lib/cn"
 import { Container } from "@/shared/ui/container/container"
 import { Footer } from "@/widgets/footer/ui/footer"
 import { Header } from "@/widgets/header/ui/header"
+import { YandexAdsScript } from "@/widgets/yandex-ads"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<Header />
 				<Container className="flex-1 px-4 py-16 sm:px-6">{children}</Container>
 				<Footer />
+				<YandexAdsScript />
 			</body>
 		</html>
 	)
