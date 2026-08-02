@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 		.slice(0, 160)
 
 	return {
-		title: `${post.title} — Рецепты от Наташи`,
+		title: `${post.title}`,
 		description,
 		openGraph: {
 			title: post.title,
@@ -73,14 +73,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 			<div className="text-secondary border-primary/40 mt-4 mb-6 inline-block border-b-2 border-dashed pb-2 text-xs tracking-widest uppercase">
 				{formatDateRu(post.date)}
 			</div>
-
-			{post.image && (
-				<img
-					src={`${process.env["NEXT_PUBLIC_BASE_PATH"] ?? ""}${post.image}`}
-					alt={post.title}
-					className="mb-10 h-72 w-full rounded-2xl object-cover shadow-lg sm:h-96"
-				/>
-			)}
 
 			<MDXRemote source={post.content} components={mdxComponents} />
 		</main>

@@ -2,7 +2,7 @@ import { H1, H2 } from "@/shared/ui/typography"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-	title: "Контакты — Рецепты от Наташи",
+	title: "Контакты",
 	description: "Контакты сайта «Рецепты от Наташи».",
 }
 

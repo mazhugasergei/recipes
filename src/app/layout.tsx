@@ -4,6 +4,14 @@ import { cn } from "@/shared/lib/cn"
 import { Container } from "@/shared/ui/container/container"
 import { Footer } from "@/widgets/footer/ui/footer"
 import { Header } from "@/widgets/header/ui/header"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+	title: {
+		template: "%s — Рецепты от Наташи",
+		default: "Рецепты от Наташи — домашняя кухня",
+	},
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (

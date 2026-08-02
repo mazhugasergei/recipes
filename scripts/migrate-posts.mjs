@@ -128,15 +128,13 @@ async function migratePost(filename) {
 		if (!isRemoteUrl(src)) usedLocalImages.add(path.basename(src))
 	}
 
+	// no more separate frontmatter "image" field — the cover image is now just whichever image
+	// appears first in the post body, handled by the same walk as every other inline image below
 	const newFrontmatter = { ...data }
-	if (data.image) {
-		trackIfLocal(data.image)
-		const buffer = await loadImageBuffer(data.image, POSTS_DIR)
-		const imageFilename = await saveAsWebp(buffer, imagesDir)
-		newFrontmatter.image = `${publicUrlBase}/${imageFilename}`
-	}
+	delete newFrontmatter.image
 
-	// walk every markdown image in the body and replace its src with the migrated local file
+	// walk every markdown image in the body (including what used to be the frontmatter cover image,
+	// now expected to be the first image in the content) and replace its src with the migrated local file
 	const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
 	let newContent = ""
 	let lastIndex = 0

@@ -5,7 +5,7 @@ import { Metadata } from "next"
 import { ReactNode } from "react"
 
 export const metadata: Metadata = {
-	title: "Условия использования — Рецепты от Наташи",
+	title: "Условия использования",
 	description: "Условия использования сайта «Рецепты от Наташи».",
 }
 
