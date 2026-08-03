@@ -1,7 +1,7 @@
 import createMDX from "@next/mdx"
 import type { NextConfig } from "next"
 
-const basePath = process.env.NODE_ENV === "production" ? "/recipes" : ""
+const basePath = ""
 
 const nextConfig: NextConfig = {
 	reactCompiler: true,
